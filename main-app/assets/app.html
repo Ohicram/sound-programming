@@ -1,0 +1,21 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function HandleOpenFileDialog(evt) {
+        // Call our C++ callback 'GetMessage'
+        var filename = OnOpenFileDialog();
+
+        // Display the result in our 'message' div element and apply the
+        // rainbow effect to our document's body.
+        document.getElementById('filePath').value = filename;
+        }
+    </script>
+</head>
+<body>
+    <div>
+            <input type="text" id="filePath" name="filePath"/>
+            <button onclick="HandleOpenFileDialog(event);">...</button>
+            <button onclick="LoadTrack();"> Load </button>
+    </div>
+</body>
+</html>
