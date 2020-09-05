@@ -5,6 +5,27 @@
 #include  <iostream>
 using namespace ultralight;
 
+#include <windows.h>
+#include "FmodWrapperLibrary.h"
+
+// Returns an empty string if dialog is canceled
+std::string openfilename(const char* filter = "All Files (*.*)\0*.*\0", HWND owner = NULL) {
+	OPENFILENAME ofn;
+	char fileName[MAX_PATH] = "";
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = owner;
+	ofn.lpstrFilter = filter;
+	ofn.lpstrFile = fileName;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+	ofn.lpstrDefExt = "";
+	std::string fileNameStr;
+	if (GetOpenFileName(&ofn))
+		fileNameStr = fileName;
+	return fileNameStr;
+}
+
 class MyApp : public LoadListener {
 	RefPtr<Overlay> overlay_;
 public:
@@ -42,8 +63,9 @@ public:
 		/// Return our message to JavaScript as a JSValue.
 		///
 		///
+		std::string filename = openfilename();
 		std::cout << "OnClick!\n";
-		return JSValue("C:\Qualcosa.mp3");
+		return JSValue(filename.c_str());
 	}
 
 	///
@@ -88,6 +110,7 @@ public:
 };
 
 int main() {
+	FmodWrapperLibrary::FmodWrapper::SayHello();
 	///
 	/// Create our main App instance.
 	///
