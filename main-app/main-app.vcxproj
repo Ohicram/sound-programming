@@ -95,8 +95,8 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;$(SolutionDir)fmod-core\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
@@ -114,8 +114,8 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;$(SolutionDir)fmod-core\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
@@ -137,8 +137,8 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;$(SolutionDir)fmod-core\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
@@ -160,8 +160,8 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ultralight\lib;$(SolutionDir)fmod-core\lib\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;Ultralight.lib;UltralightCore.lib;AppCore.lib;WebCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
