@@ -39,11 +39,10 @@ namespace FmodWrapperLibrary
 			printf("No sound playing\n");
 			return;
 		}
-		FMOD_RESULT result;
-		result = m_channel->setPaused(status);
+		FMOD_RESULT const result = m_channel->setPaused(status);
 		if (result != FMOD_OK)
 		{
-			printf("[FMOD error %d] : Sound (%s) cannot be paused - %s\n", result, FMOD_ErrorString(result));
+			printf("[FMOD error %d] : Sound cannot be paused - %s\n", result, FMOD_ErrorString(result));
 		}
 		else
 		{
@@ -59,25 +58,42 @@ namespace FmodWrapperLibrary
 			printf("No sound loaded\n");
 			return;
 		}
-		FMOD_RESULT result;
-		result = m_system->playSound(m_sound, 0, false, &m_channel);
+		 FMOD_RESULT const result = m_system->playSound(m_sound, 0, false, &m_channel);
 		if (result != FMOD_OK)
 		{
 			m_isPaused = false;
 			m_channel = nullptr;
-			printf("[FMOD error %d] : Sound (%s) cannot be played - %s\n", result, FMOD_ErrorString(result));
+			printf("[FMOD error %d] : Sound cannot be played - %s\n", result, FMOD_ErrorString(result));
 		}
 		else
 		{
 			printf("Sound played correctly\n");
 		}
 	}
+
+	void FmodWrapper::Stop()
+	{
+		if (m_channel == nullptr)
+		{
+			printf("No sound played\n");
+			return;
+		}
+		FMOD_RESULT const result = m_channel->stop();
+		if (result != FMOD_OK)
+		{
+			printf("[FMOD error %d] : Sound cannot be stopped - %s\n", result, FMOD_ErrorString(result));
+		}
+		else
+		{
+			printf("Sound stopped correctly\n");
+		}
+	}
+
 	
 	void FmodWrapper::LoadSound(const char* filepath, bool compressed)
 	{
-		FMOD_RESULT result;
-		FMOD_MODE fmod_mode = compressed ? FMOD_CREATECOMPRESSEDSAMPLE : FMOD_CREATESAMPLE;
-		result = m_system->createSound(filepath, fmod_mode, NULL, &m_sound);
+		FMOD_MODE const fmod_mode = compressed ? FMOD_CREATECOMPRESSEDSAMPLE : FMOD_CREATESAMPLE;
+		FMOD_RESULT const result = m_system->createSound(filepath, fmod_mode, NULL, &m_sound);
 		if (result != FMOD_OK)
 		{
 			printf("[FMOD error %d] : File (%s) cannot be loaded - %s\n", result, filepath,  FMOD_ErrorString(result));
@@ -94,9 +110,8 @@ namespace FmodWrapperLibrary
 
 	void FmodWrapper::LoadSoundStreaming(const char* filepath, bool compressed)
 	{
-		FMOD_RESULT result;
 		FMOD_MODE fmod_mode = compressed ? FMOD_CREATECOMPRESSEDSAMPLE : FMOD_CREATESAMPLE;
-		result = m_system->createStream(filepath, fmod_mode, NULL, &m_sound);
+		FMOD_RESULT const result = m_system->createStream(filepath, fmod_mode, NULL, &m_sound);
 		if (result != FMOD_OK)
 		{
 			printf("[FMOD error %d] : File (%s) cannot be loaded - %s\n", result, filepath,  FMOD_ErrorString(result));
@@ -115,8 +130,7 @@ namespace FmodWrapperLibrary
 	}
 	FmodWrapper::FmodWrapper()
 	{
-		FMOD_RESULT result;
-		result = FMOD::System_Create(&m_system);      // Create the main system object.
+		FMOD_RESULT result = FMOD::System_Create(&m_system);      // Create the main system object.
 		if (result != FMOD_OK)
 		{
 			printf("FMOD error! (%d) %s\n", result, FMOD_ErrorString(result));

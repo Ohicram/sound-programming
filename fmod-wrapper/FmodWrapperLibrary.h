@@ -16,6 +16,7 @@ namespace FmodWrapperLibrary
 		void Pause(bool status);
 		void Play();
 		void PlayPause();
+		void Stop();
 
 		
 		FmodWrapper(FmodWrapper const&) = delete;

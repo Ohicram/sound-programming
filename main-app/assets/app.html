@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 <head>
     <script type="text/javascript">
         function HandleOpenFileDialog(evt) {
@@ -19,8 +19,10 @@
             <button onclick="LoadTrack();"> Load </button>
     </div>
     <div>
-        <input type="checkbox" id="play-pause" onclick="PlayPause();"/>
+        <input type="checkbox" id="play-pause" onclick="PlayPause();" />
         <label for="play-pause" id="play-pause-label" class="win-button"></label>
+        <input type="button" id="stop" onclick="Stop();" />
+        <label for="stop" id="stop-label"></label>
     </div>
 </body>
 </html>

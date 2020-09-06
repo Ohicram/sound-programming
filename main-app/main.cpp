@@ -58,6 +58,11 @@ public:
 	{
 		std::cout << "Not implemented yet\n";
 	}
+	void Stop(const JSObject& thisObject, const JSArgs& args)
+	{
+		std::cout << "Stop button pressed\n";
+		FmodWrapperLibrary::FmodWrapper::getInstance().Stop();
+	}
 	void PlayPause(const JSObject& thisObject, const JSArgs& args)
 	{
 		String resultString = overlay_->view()->EvaluateScript("document.getElementById('play-pause').checked;");
@@ -123,6 +128,7 @@ public:
 		global["OnOpenFileDialog"] = BindJSCallbackWithRetval(&MyApp::OnOpenFileDialog);
 		global["LoadTrack"] = BindJSCallback(&MyApp::LoadTrack);
 		global["PlayPause"] = BindJSCallback(&MyApp::PlayPause);
+		global["Stop"] = BindJSCallback(&MyApp::Stop);
 	}
 };
 

@@ -13,3 +13,13 @@
     font-size: 32px;
     content: '►';
 }
+
+#stop {
+    display: none;
+}
+
+#stop-label::after {
+    font-family: sans-serif;
+    font-size: 32px;
+    content: '⏹';
+}
