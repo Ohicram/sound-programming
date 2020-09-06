@@ -95,13 +95,16 @@ public:
 		}*/
 	}
 	JSValue OnOpenFileDialog(const JSObject& thisObject, const JSArgs& args) {
-		///
-		/// Return our message to JavaScript as a JSValue.
-		///
-		///
 		std::string filename = openfilename();
 		FmodWrapperLibrary::FmodWrapper::getInstance().LoadSound(filename.c_str());
 		return JSValue(filename.c_str());
+	}
+
+	void ChangeVolume(const JSObject& thisObject, const JSArgs& args) {
+		String resultString = overlay_->view()->EvaluateScript("document.getElementById('volume-slider').value;");
+		int volume = std::atoi(resultString.utf8().data());
+		std::cout << "Volume: " << volume << std::endl;
+		FmodWrapperLibrary::FmodWrapper::getInstance().SetVolume(volume);
 	}
 
 	///
@@ -145,6 +148,7 @@ public:
 		global["PlayPause"] = BindJSCallback(&MyApp::PlayPause);
 		global["Stop"] = BindJSCallback(&MyApp::Stop);
 		global["Loop"] = BindJSCallback(&MyApp::Repeat);
+		global["OnVolumeChange"] = BindJSCallback(&MyApp::ChangeVolume);
 	}
 };
 

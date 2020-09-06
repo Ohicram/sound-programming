@@ -5,6 +5,22 @@
 
 namespace FmodWrapperLibrary
 {
+	void FmodWrapper::SetVolume(int volume)
+	{
+		m_volume = volume / 100.f;
+		if(m_channel != nullptr)
+		{
+			FMOD_RESULT const result = m_channel->setVolume(m_volume);
+			if (result != FMOD_OK)
+			{
+				printf("[FMOD error %d] : Channel volume cannot be set - %s\n", result, FMOD_ErrorString(result));
+			}
+			else
+			{
+				printf("Channel Volume set correctly\n");
+			}
+		}
+	}
 	void FmodWrapper::Repeat(bool enable)
 	{
 		m_repeatMode = enable ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;

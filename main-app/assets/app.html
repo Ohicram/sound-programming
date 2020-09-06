@@ -9,14 +9,23 @@
         // rainbow effect to our document's body.
         document.getElementById('filePath').value = filename;
         }
+        function outputUpdate(vol) {
+          if(vol < 30)
+	          document.querySelector('#speaker-icon').innerHTML  = '&#128264';
+          else if(vol > 70)
+	          document.querySelector('#speaker-icon').innerHTML  = '&#128266';
+          else
+	          document.querySelector('#speaker-icon').innerHTML  = '&#128265';
+            OnVolumeChange();
+        }
     </script>
     <link rel="stylesheet" href="app-style.css" />
 </head>
 <body>
     <div>
-            <input type="text" id="filePath" name="filePath"/>
-            <button onclick="HandleOpenFileDialog(event);">...</button>
-            <button onclick="LoadTrack();"> Load </button>
+        <input type="text" id="filePath" name="filePath" />
+        <button onclick="HandleOpenFileDialog(event);">...</button>
+        <button onclick="LoadTrack();"> Load </button>
     </div>
     <div>
         <input type="checkbox" id="play-pause" onclick="PlayPause();" />
@@ -28,6 +37,11 @@
             <label for="loop" id="loop-label" class="win-button"></label>
             <span></span>
         </section>
+    </div>
+    <div>
+        <label id="speaker-icon">&#128265;</label>
+        <input id="volume-slider" type="range" min="0" max="100" value="50" id="fader"
+               step="1" oninput="outputUpdate(value)">
     </div>
 </body>
 </html>
