@@ -2,6 +2,7 @@
 #include <fmod.hpp>
 namespace FmodWrapperLibrary
 {
+	const size_t MAX_CHNLS = 4;
 	class FmodWrapper
 	{
 	public:
@@ -21,6 +22,8 @@ namespace FmodWrapperLibrary
 		void SetVolume(int volume);
 		void SetPan(int percentage);
 
+		void SelectChannel(size_t index);
+
 		
 		FmodWrapper(FmodWrapper const&) = delete;
 		void operator=(FmodWrapper const&) = delete;
@@ -28,15 +31,21 @@ namespace FmodWrapperLibrary
 		FmodWrapper();
 
 		FMOD::System* m_system = nullptr;
-		FMOD::Sound* m_sound = nullptr;
-		FMOD::Channel* m_channel = nullptr;
 
-		FMOD_MODE m_repeatMode = FMOD_LOOP_OFF;
-		
-		bool m_isPaused;
-		unsigned m_soundLength;
-		float m_volume;
-		float m_panAudio;
+		struct channelInterface {
+			FMOD::Sound* m_sound;
+			FMOD::Channel* m_channel;
+
+			FMOD_MODE m_repeatMode = FMOD_LOOP_OFF;
+
+			bool m_isPaused;
+			unsigned m_soundLength;
+			float m_volume;
+			float m_panAudio;
+		};
+
+		channelInterface m_availableChannels[MAX_CHNLS];
+		channelInterface* m_currCh = m_availableChannels;
 	};
 }
 

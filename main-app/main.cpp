@@ -114,6 +114,13 @@ public:
 		FmodWrapperLibrary::FmodWrapper::getInstance().SetPan(percentage);
 	}
 
+	void ChangeChannel(const JSObject& thisObject, const JSArgs& args) {
+		String resultString = overlay_->view()->EvaluateScript("document.getElementById('select-channel').value;");
+		int index = std::atoi(resultString.utf8().data());
+		std::cout << "Selecting channel: " << index << std::endl;
+		FmodWrapperLibrary::FmodWrapper::getInstance().SelectChannel(index);
+	}
+
 	///
 	/// Inherited from LoadListener, called when the page has finished parsing
 	/// the document.
@@ -157,6 +164,7 @@ public:
 		global["Loop"] = BindJSCallback(&MyApp::Repeat);
 		global["OnVolumeChange"] = BindJSCallback(&MyApp::ChangeVolume);
 		global["OnPanChange"] = BindJSCallback(&MyApp::ChangePan);
+		global["OnChannelChanged"] = BindJSCallback(&MyApp::ChangeChannel);
 	}
 };
 

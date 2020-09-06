@@ -23,6 +23,16 @@
 </head>
 <body>
     <div>
+        <label>Select Channel: </label>
+        <select id="select-channel" onchange="OnChannelChanged();">
+            <option value="0">Ch. 1</option>
+            <option value="1">Ch. 2</option>
+            <option value="2">Ch. 3</option>
+            <option value="3">Ch. 4</option>
+        </select>
+    </div>
+    <br />
+    <div>
         <input type="text" id="filePath" name="filePath" />
         <button onclick="HandleOpenFileDialog(event);">...</button>
         <button onclick="LoadTrack();"> Load </button>
@@ -41,10 +51,10 @@
     <div>
         <label id="speaker-icon">&#128265;</label>
         <input id="volume-slider" type="range" min="0" max="100" value="50" id="fader"
-               step="1" onchange="outputUpdate(value)"/>
+               step="1" onchange="outputUpdate(value)" />
     </div>
     <div>
-        <input onchange="OnPanChange();" id="pan-slider" type="range" value="50" min="-100" max="100"/>
+        <input onchange="OnPanChange();" id="pan-slider" type="range" value="50" min="-100" max="100" />
     </div>
     <div class="box-panaudio">
         <span>L</span><span>R</span>
