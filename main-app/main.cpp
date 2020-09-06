@@ -63,6 +63,21 @@ public:
 		std::cout << "Stop button pressed\n";
 		FmodWrapperLibrary::FmodWrapper::getInstance().Stop();
 	}
+	void Repeat(const JSObject& thisObject, const JSArgs& args)
+	{
+		String resultString = overlay_->view()->EvaluateScript("document.getElementById('loop').checked;");
+		std::string result_str = std::string(resultString.utf8().data());
+		if(result_str.compare("false"))
+		{
+			FmodWrapperLibrary::FmodWrapper::getInstance().Repeat(true);
+			std::cout << "Repeat on\n";
+		}
+		else
+		{
+			FmodWrapperLibrary::FmodWrapper::getInstance().Repeat(false);
+			std::cout << "Repeat off\n";
+		}
+	}
 	void PlayPause(const JSObject& thisObject, const JSArgs& args)
 	{
 		String resultString = overlay_->view()->EvaluateScript("document.getElementById('play-pause').checked;");
@@ -129,6 +144,7 @@ public:
 		global["LoadTrack"] = BindJSCallback(&MyApp::LoadTrack);
 		global["PlayPause"] = BindJSCallback(&MyApp::PlayPause);
 		global["Stop"] = BindJSCallback(&MyApp::Stop);
+		global["Loop"] = BindJSCallback(&MyApp::Repeat);
 	}
 };
 

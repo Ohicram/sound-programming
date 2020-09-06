@@ -5,6 +5,22 @@
 
 namespace FmodWrapperLibrary
 {
+	void FmodWrapper::Repeat(bool enable)
+	{
+		m_repeatMode = enable ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF;
+		if (m_channel != nullptr)
+		{
+			FMOD_RESULT const result = m_channel->setMode(m_repeatMode);
+			if (result != FMOD_OK)
+			{
+				printf("[FMOD error %d] : Sound mode cannot be set - %s\n", result, FMOD_ErrorString(result));
+			}
+			else
+			{
+				printf("Sound loop mode set correctly\n");
+			}
+		}
+	}
 
 	void FmodWrapper::PlayPause()
 	{
@@ -93,7 +109,7 @@ namespace FmodWrapperLibrary
 	void FmodWrapper::LoadSound(const char* filepath, bool compressed)
 	{
 		FMOD_MODE const fmod_mode = compressed ? FMOD_CREATECOMPRESSEDSAMPLE : FMOD_CREATESAMPLE;
-		FMOD_RESULT const result = m_system->createSound(filepath, fmod_mode, NULL, &m_sound);
+		FMOD_RESULT const result = m_system->createSound(filepath, fmod_mode | m_repeatMode, NULL, &m_sound);
 		if (result != FMOD_OK)
 		{
 			printf("[FMOD error %d] : File (%s) cannot be loaded - %s\n", result, filepath,  FMOD_ErrorString(result));

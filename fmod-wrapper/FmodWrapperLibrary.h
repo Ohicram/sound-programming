@@ -16,6 +16,7 @@ namespace FmodWrapperLibrary
 		void Pause(bool status);
 		void Play();
 		void PlayPause();
+		void Repeat(bool enable);
 		void Stop();
 
 		
@@ -28,6 +29,8 @@ namespace FmodWrapperLibrary
 		FMOD::Sound* m_sound = nullptr;
 		FMOD::Channel* m_channel = nullptr;
 
+		FMOD_MODE m_repeatMode = FMOD_LOOP_OFF;
+		
 		bool m_isPaused;
 		unsigned m_soundLength;
 	};
