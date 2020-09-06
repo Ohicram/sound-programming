@@ -58,13 +58,29 @@ public:
 	{
 		std::cout << "Not implemented yet\n";
 	}
+	void PlayPause(const JSObject& thisObject, const JSArgs& args)
+	{
+		String resultString = overlay_->view()->EvaluateScript("document.getElementById('play-pause').checked;");
+		FmodWrapperLibrary::FmodWrapper::getInstance().PlayPause();
+		/*std::string result_str = std::string(resultString.utf8().data());
+		if(result_str.compare("true"))
+		{
+			FmodWrapperLibrary::FmodWrapper::getInstance().Pause();
+			std::cout << "Pause\n";
+		}
+		else
+		{
+			FmodWrapperLibrary::FmodWrapper::getInstance().Play();
+			std::cout << "Play\n";
+		}*/
+	}
 	JSValue OnOpenFileDialog(const JSObject& thisObject, const JSArgs& args) {
 		///
 		/// Return our message to JavaScript as a JSValue.
 		///
 		///
 		std::string filename = openfilename();
-		std::cout << "OnClick!\n";
+		FmodWrapperLibrary::FmodWrapper::getInstance().LoadSound(filename.c_str());
 		return JSValue(filename.c_str());
 	}
 
@@ -106,6 +122,7 @@ public:
 		///
 		global["OnOpenFileDialog"] = BindJSCallbackWithRetval(&MyApp::OnOpenFileDialog);
 		global["LoadTrack"] = BindJSCallback(&MyApp::LoadTrack);
+		global["PlayPause"] = BindJSCallback(&MyApp::PlayPause);
 	}
 };
 

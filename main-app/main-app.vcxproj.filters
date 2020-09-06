@@ -21,5 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\app.html" />
+    <None Include="assets\app-style.css" />
   </ItemGroup>
 </Project>

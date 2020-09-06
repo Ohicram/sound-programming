@@ -10,12 +10,17 @@
         document.getElementById('filePath').value = filename;
         }
     </script>
+    <link rel="stylesheet" href="app-style.css" />
 </head>
 <body>
     <div>
             <input type="text" id="filePath" name="filePath"/>
             <button onclick="HandleOpenFileDialog(event);">...</button>
             <button onclick="LoadTrack();"> Load </button>
+    </div>
+    <div>
+        <input type="checkbox" id="play-pause" onclick="PlayPause();"/>
+        <label for="play-pause" id="play-pause-label" class="win-button"></label>
     </div>
 </body>
 </html>

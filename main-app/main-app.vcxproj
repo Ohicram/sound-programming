@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)fmod-core\inc\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -100,8 +100,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
-xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
-</Command>
+xcopy "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
+xcopy "$(SolutionDir)fmod-core\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,7 +110,7 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)fmod-core\inc\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,8 +119,8 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
-xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
-</Command>
+xcopy "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
+xcopy "$(SolutionDir)fmod-core\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,7 +131,7 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)fmod-core\inc\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,8 +142,8 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
-xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
-</Command>
+xcopy "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
+xcopy "$(SolutionDir)fmod-core\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -154,7 +154,7 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)bin\fmod-wrapper\include\;$(SolutionDir)fmod-core\inc\;$(SolutionDir)ultralight\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,14 +165,15 @@ xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)assets" "$(TargetDir)assets" /e /y /i /r
-xcopy  "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
-</Command>
+xcopy "$(SolutionDir)ultralight\bin\*.dll" "$(OutDir)" /y /d
+xcopy "$(SolutionDir)fmod-core\lib\$(PlatformTarget)\*.dll" "$(OutDir)" /y /d</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assets\app-style.css" />
     <None Include="assets\app.html" />
   </ItemGroup>
   <ItemGroup>
