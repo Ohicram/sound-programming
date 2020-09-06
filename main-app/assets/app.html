@@ -41,7 +41,14 @@
     <div>
         <label id="speaker-icon">&#128265;</label>
         <input id="volume-slider" type="range" min="0" max="100" value="50" id="fader"
-               step="1" oninput="outputUpdate(value)">
+               step="1" onchange="outputUpdate(value)"/>
     </div>
+    <div>
+        <input onchange="OnPanChange();" id="pan-slider" type="range" value="50" min="-100" max="100"/>
+    </div>
+    <div class="box-panaudio">
+        <span>L</span><span>R</span>
+    </div>
+
 </body>
 </html>

@@ -2,12 +2,30 @@
 
 #include <iostream>
 #include <fmod_errors.h>
-
+#include <algorithm>
 namespace FmodWrapperLibrary
 {
+	void FmodWrapper::SetPan(int percentage)
+	{
+		m_panAudio = percentage / 100.f;
+		m_panAudio = m_panAudio < -1 ? -1 : (m_panAudio > 1 ? 1 : m_panAudio);
+		if (m_channel != nullptr)
+		{
+			FMOD_RESULT const result = m_channel->setPan(m_panAudio);
+			if (result != FMOD_OK)
+			{
+				printf("[FMOD error %d] : Channel pan cannot be set - %s\n", result, FMOD_ErrorString(result));
+			}
+			else
+			{
+				printf("Channel pan set correctly\n");
+			}
+		}
+	}
 	void FmodWrapper::SetVolume(int volume)
 	{
 		m_volume = volume / 100.f;
+		m_volume = m_volume < 0 ? 0 : (m_volume > 1 ? 1 : m_volume);
 		if(m_channel != nullptr)
 		{
 			FMOD_RESULT const result = m_channel->setVolume(m_volume);

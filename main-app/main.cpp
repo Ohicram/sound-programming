@@ -107,6 +107,13 @@ public:
 		FmodWrapperLibrary::FmodWrapper::getInstance().SetVolume(volume);
 	}
 
+	void ChangePan(const JSObject& thisObject, const JSArgs& args) {
+		String resultString = overlay_->view()->EvaluateScript("document.getElementById('pan-slider').value;");
+		int percentage = std::atoi(resultString.utf8().data());
+		std::cout << "Pan: " << percentage << std::endl;
+		FmodWrapperLibrary::FmodWrapper::getInstance().SetPan(percentage);
+	}
+
 	///
 	/// Inherited from LoadListener, called when the page has finished parsing
 	/// the document.
@@ -149,6 +156,7 @@ public:
 		global["Stop"] = BindJSCallback(&MyApp::Stop);
 		global["Loop"] = BindJSCallback(&MyApp::Repeat);
 		global["OnVolumeChange"] = BindJSCallback(&MyApp::ChangeVolume);
+		global["OnPanChange"] = BindJSCallback(&MyApp::ChangePan);
 	}
 };
 

@@ -19,6 +19,7 @@ namespace FmodWrapperLibrary
 		void Repeat(bool enable);
 		void Stop();
 		void SetVolume(int volume);
+		void SetPan(int percentage);
 
 		
 		FmodWrapper(FmodWrapper const&) = delete;
@@ -35,6 +36,7 @@ namespace FmodWrapperLibrary
 		bool m_isPaused;
 		unsigned m_soundLength;
 		float m_volume;
+		float m_panAudio;
 	};
 }
 
