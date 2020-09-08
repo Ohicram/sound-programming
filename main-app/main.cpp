@@ -54,6 +54,19 @@ public:
 	/// JavaScript by calling GetMessage(). We bind the callback within
 	/// the DOMReady callback defined below.
 	///
+	void updateChannelParameters()
+	{
+		int vol = FmodWrapperLibrary::FmodWrapper::getInstance().GetVolume();
+		int pan = FmodWrapperLibrary::FmodWrapper::getInstance().GetPan();
+		bool rep = FmodWrapperLibrary::FmodWrapper::getInstance().IsRepeatOn();
+		bool pause = FmodWrapperLibrary::FmodWrapper::getInstance().IsPaused();
+		std::string trackName = FmodWrapperLibrary::FmodWrapper::getInstance().GetTrackName();
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('filePath').innerHTML = '" + trackName + "';").c_str());
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('pan-slider').value = " + std::to_string(pan) + ";").c_str());
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('volume-slider').value = " + std::to_string(vol) + ";").c_str());
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('loop').checked = " + std::to_string(rep) + ";").c_str());
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('play-pause').checked = " + std::to_string(!pause) + ";").c_str());
+	}
 	void LoadTrack(const JSObject& thisObject, const JSArgs& args)
 	{
 		std::cout << "Not implemented yet\n";
@@ -82,17 +95,7 @@ public:
 	{
 		String resultString = overlay_->view()->EvaluateScript("document.getElementById('play-pause').checked;");
 		FmodWrapperLibrary::FmodWrapper::getInstance().PlayPause();
-		/*std::string result_str = std::string(resultString.utf8().data());
-		if(result_str.compare("true"))
-		{
-			FmodWrapperLibrary::FmodWrapper::getInstance().Pause();
-			std::cout << "Pause\n";
-		}
-		else
-		{
-			FmodWrapperLibrary::FmodWrapper::getInstance().Play();
-			std::cout << "Play\n";
-		}*/
+		overlay_->view()->EvaluateScript(std::string("document.getElementById('play-pause').checked = " + std::to_string(!FmodWrapperLibrary::FmodWrapper::getInstance().IsPaused()) + ";").c_str());
 	}
 	JSValue OnOpenFileDialog(const JSObject& thisObject, const JSArgs& args) {
 		std::string filename = openfilename();
@@ -119,7 +122,9 @@ public:
 		int index = std::atoi(resultString.utf8().data());
 		std::cout << "Selecting channel: " << index << std::endl;
 		FmodWrapperLibrary::FmodWrapper::getInstance().SelectChannel(index);
+		updateChannelParameters();
 	}
+
 
 	///
 	/// Inherited from LoadListener, called when the page has finished parsing
@@ -165,11 +170,12 @@ public:
 		global["OnVolumeChange"] = BindJSCallback(&MyApp::ChangeVolume);
 		global["OnPanChange"] = BindJSCallback(&MyApp::ChangePan);
 		global["OnChannelChanged"] = BindJSCallback(&MyApp::ChangeChannel);
+
+		updateChannelParameters();
 	}
 };
 
 int main() {
-	FmodWrapperLibrary::FmodWrapper::SayHello();
 	///
 	/// Create our main App instance.
 	///
@@ -178,12 +184,12 @@ int main() {
 	///
 	/// Create our Window using default window flags.
 	///
-	auto window = Window::Create(app->main_monitor(), 300, 300, false, kWindowFlags_Titled);
+	auto window = Window::Create(app->main_monitor(), 308, 324, false, kWindowFlags_Titled);
 
 	///
 	/// Set our window title.
 	///
-	window->SetTitle("Ultralight Sample 4 - JavaScript");
+	window->SetTitle("Sound Programming - FMOD Wrapper");
 
 	///
 	/// Bind our App's main window.

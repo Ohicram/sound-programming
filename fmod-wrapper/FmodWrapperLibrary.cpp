@@ -5,6 +5,31 @@
 #include <algorithm>
 namespace FmodWrapperLibrary
 {
+	int FmodWrapper::GetPan()
+	{
+		return static_cast<int>(m_currCh->m_panAudio * 100);
+	}
+
+	int FmodWrapper::GetVolume()
+	{
+		return static_cast<int>(m_currCh->m_volume * 100);
+	}
+
+	bool FmodWrapper::IsRepeatOn()
+	{
+		return m_currCh->m_repeatMode == FMOD_LOOP_NORMAL;
+	}
+
+	bool FmodWrapper::IsPaused()
+	{
+		return m_currCh->m_isPaused;
+	}
+
+	std::string FmodWrapper::GetTrackName()
+	{
+		return m_currCh->m_TrackName;
+	}
+
 	void FmodWrapper::SetPan(int percentage)
 	{
 		m_currCh->m_panAudio = percentage / 100.f;
@@ -77,12 +102,12 @@ namespace FmodWrapperLibrary
 			}
 			else
 			{
-				Pause(!m_currCh->m_isPaused);
+				SetPaused(!m_currCh->m_isPaused);
 			}
 		}
 	}
 
-	void FmodWrapper::Pause(bool status)
+	void FmodWrapper::SetPaused(bool status)
 	{
 		if (m_currCh->m_channel == nullptr)
 		{
@@ -111,12 +136,13 @@ namespace FmodWrapperLibrary
 		 FMOD_RESULT const result = m_system->playSound(m_currCh->m_sound, 0, false, &(m_currCh->m_channel));
 		if (result != FMOD_OK)
 		{
-			m_currCh->m_isPaused = false;
+			m_currCh->m_isPaused = true;
 			m_currCh->m_channel = nullptr;
 			printf("[FMOD error %d] : Sound cannot be played - %s\n", result, FMOD_ErrorString(result));
 		}
 		else
 		{
+			m_currCh->m_isPaused = false;
 			printf("Sound played correctly\n");
 		}
 	}
@@ -139,7 +165,6 @@ namespace FmodWrapperLibrary
 		}
 	}
 
-	
 	void FmodWrapper::LoadSound(const char* filepath, bool compressed)
 	{
 		FMOD_MODE const fmod_mode = compressed ? FMOD_CREATECOMPRESSEDSAMPLE : FMOD_CREATESAMPLE;
@@ -155,7 +180,7 @@ namespace FmodWrapperLibrary
 			printf("Sound: %s loaded correctly\n", filepath);
 			m_currCh->m_sound->getLength(&(m_currCh->m_soundLength), FMOD_TIMEUNIT_MS);
 		}
-
+		m_currCh->m_TrackName = std::string(filepath);
 	}
 
 	void FmodWrapper::LoadSoundStreaming(const char* filepath, bool compressed)
@@ -179,10 +204,6 @@ namespace FmodWrapperLibrary
 		m_currCh = &(m_availableChannels[index]);
 	}
 
-	void FmodWrapper::SayHello()
-	{
-		std::cout << "Hello!\n";
-	}
 	FmodWrapper::FmodWrapper()
 	{
 		FMOD_RESULT result = FMOD::System_Create(&m_system);      // Create the main system object.

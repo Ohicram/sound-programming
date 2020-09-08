@@ -7,7 +7,7 @@
 
         // Display the result in our 'message' div element and apply the
         // rainbow effect to our document's body.
-        document.getElementById('filePath').value = filename;
+        document.getElementById('filePath').innerHTML = filename;
         }
         function outputUpdate(vol) {
           if(vol < 30)
@@ -23,7 +23,7 @@
 </head>
 <body>
     <div>
-        <label>Select Channel: </label>
+        <div id="labelchannel">Select Channel: </div>
         <select id="select-channel" onchange="OnChannelChanged();">
             <option value="0">Ch. 1</option>
             <option value="1">Ch. 2</option>
@@ -33,11 +33,10 @@
     </div>
     <br />
     <div>
-        <input type="text" id="filePath" name="filePath" />
-        <button onclick="HandleOpenFileDialog(event);">...</button>
-        <button onclick="LoadTrack();"> Load </button>
+        <div id="filePath" > </div>
+        <button onclick="HandleOpenFileDialog(event);" id="filebutton">...</button>
     </div>
-    <div>
+    <div style="margin-top:10px; margin-left:54px;">
         <input type="checkbox" id="play-pause" onclick="PlayPause();" />
         <label for="play-pause" id="play-pause-label" class="win-button"></label>
         <input type="button" id="stop" onclick="Stop();" />
@@ -48,7 +47,7 @@
             <span></span>
         </section>
     </div>
-    <div>
+    <div style="margin-top:10px">
         <label id="speaker-icon">&#128265;</label>
         <input id="volume-slider" type="range" min="0" max="100" value="50" id="fader"
                step="1" onchange="outputUpdate(value)" />
