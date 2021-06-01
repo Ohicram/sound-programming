@@ -6,4 +6,4 @@ It is a simple wrapper for fmod https://fmod.com/, it allows the user to configu
 
 The GUI of the application has been developed using the Ultralight SDK https://ultralig.ht/
 
-![alt text](doc/images/screen.png?raw=true "Application Snapshot")
+![Application Snapshot](https://github.com/Ohicram/sound-programming/blob/master/doc/images/screen.PNG "Application Snapshot")
